@@ -1,0 +1,42 @@
+<!-- main/templates/main/subscription_detail.html -->
+
+{% extends 'main/base.html' %}
+
+{% block title %}Subscription Details{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Subscription Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-3">Customer</dt>
+                            <dd class="col-sm-9">{{ subscription.customer.first_name }} {{ subscription.customer.last_name }}</dd>
+
+                            <dt class="col-sm-3">Service</dt>
+                            <dd class="col-sm-9">{{ subscription.service.name }}</dd>
+
+                            <dt class="col-sm-3">Start Date</dt>
+                            <dd class="col-sm-9">{{ subscription.start_date }}</dd>
+
+                            <dt class="col-sm-3">End Date</dt>
+                            <dd class="col-sm-9">{{ subscription.end_date }}</dd>
+                        </dl>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'subscription_edit' subscription.id %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'subscription_delete' subscription.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'subscription_list' %}" class="btn btn-secondary">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

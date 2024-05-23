@@ -1,0 +1,59 @@
+<!-- main/templates/main/subscription_list.html -->
+
+{% extends 'main/base.html' %}
+
+{% block title %}Subscriptions{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Subscription List</h3>
+                        <div class="card-tools">
+                            <a href="{% url 'subscription_add' %}" class="btn btn-primary">Add Subscription</a>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Service</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Active</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for subscription in subscriptions %}
+                                <tr>
+                                    <td>{{ subscription.id }}</td>
+                                    <td>{{ subscription.customer }}</td>
+                                    <td>{{ subscription.service }}</td>
+                                    <td>{{ subscription.start_date }}</td>
+                                    <td>{{ subscription.end_date }}</td>
+                                    <td>{{ subscription.is_active }}</td>
+                                    <td>
+                                        <a href="{% url 'subscription_detail' subscription.id %}" class="btn btn-info btn-sm">View</a>
+                                        <a href="{% url 'subscription_edit' subscription.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="{% url 'subscription_delete' subscription.id %}" method="post" style="display:inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

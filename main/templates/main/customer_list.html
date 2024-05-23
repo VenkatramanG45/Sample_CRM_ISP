@@ -1,0 +1,55 @@
+<!-- main/templates/main/customer_list.html -->
+
+{% extends 'main/base.html' %}
+
+{% block title %}Customers{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Customer List</h3>
+                        <div class="card-tools">
+                            <a href="{% url 'customer_add' %}" class="btn btn-primary">Add Customer</a>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for customer in customers %}
+                                <tr>
+                                    <td>{{ customer.id }}</td>
+                                    <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                                    <td>{{ customer.email }}</td>
+                                    <td>{{ customer.phone }}</td>
+                                    <td>
+                                        <a href="{% url 'customer_detail' customer.id %}" class="btn btn-info btn-sm">View</a>
+                                        <a href="{% url 'customer_edit' customer.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="{% url 'customer_delete' customer.id %}" method="post" style="display:inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

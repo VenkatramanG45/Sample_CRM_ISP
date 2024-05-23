@@ -1,0 +1,40 @@
+<!-- main/templates/main/customer_detail.html -->
+
+{% extends 'main/base.html' %}
+
+{% block title %}Customer Details{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Customer Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-3">First Name</dt>
+                            <dd class="col-sm-9">{{ customer.first_name }}</dd>
+
+                            <dt class="col-sm-3">Last Name</dt>
+                            <dd class="col-sm-9">{{ customer.last_name }}</dd>
+
+                            <dt class="col-sm-3">Email</dt>
+                            <dd class="col-sm-9">{{ customer.email }}</dd>
+                            
+                            <!-- Add more fields as necessary -->
+                        </dl>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'customer_edit' customer.id %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'customer_delete' customer.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'customer_list' %}" class="btn btn-secondary">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
